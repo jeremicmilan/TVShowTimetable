@@ -22,3 +22,8 @@ print_r($router->getParams());
 */
 
 App::run($_SERVER['REQUEST_URI']);
+
+if($_SESSION['login_user'] != null) {
+    echo $_SESSION['login_user'];
+    echo $_SESSION['user_id'];
+}

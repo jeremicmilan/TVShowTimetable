@@ -24,7 +24,6 @@ CREATE TABLE `TVShow` (
   `title` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `last_update` datetime NOT NULL,
-  `picture` text,
   PRIMARY KEY (TVShow_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -57,7 +56,6 @@ CREATE TABLE `Episode` (
   `season_id` int(11) NOT NULL,
   `airdate` datetime NOT NULL,
   `description` text NOT NULL,
-  `picture` text,
   PRIMARY KEY (`episode_id`),
   FOREIGN KEY (`season_id`) REFERENCES `Season`(`season_id`)
 	ON DELETE CASCADE

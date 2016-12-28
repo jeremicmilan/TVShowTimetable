@@ -6,7 +6,10 @@
  * Time: 12:22
  */
 
-Config::set('site_name', 'Your Site Name');
+
+// for routing
+Config::set('site_name', 'TV Shows Timetable');
 
 Config::set('default_controller', 'pages');
 Config::set('default_action', 'index');
+
