@@ -1,15 +1,13 @@
 <html>
     <head></head>
     <body>
-        <div align = "right">
-            <button type="button" onclick="document.location.href=\'pages/logout\';" >Log out</button>
-        </div>
+        <?php include 'include/nav.php' ?>
 
         <table>
-            <?php foreach($shows as $i => $show) { ?>
+            <?php foreach($shows as $show) { ?>
                 <tr>
-                    <th><?php echo $show->getTitle(); ?> </th>
-                    <th><?php echo $show->getDescription(); ?> </th>
+                    <th><?php echo $show["title"]; ?> </th>
+                    <th><?php echo $show["description"]; ?> </th>
                 </tr>
             <?php } ?>
         </table>

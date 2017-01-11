@@ -1,15 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pveb_student
- * Date: 14/12/16
- * Time: 14:01
- */
 
-class TimetableController extends Controller {
+namespace App\Controllers;
+
+use App\Model;
+use Core\View;
+use Core;
+
+class TimetableController extends Core\Controller {
 
     public function index() {
-        $shows = TimeTable::getAll();
+        $shows = Model\TimetableModel::getAll();
 
         View::render("timetable.view.php",["shows"=>$shows]);
     }

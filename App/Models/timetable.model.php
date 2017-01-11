@@ -1,27 +1,25 @@
 <?php
 
-class TimeTable extends Model
+namespace App\Model;
+
+use Core\Model;
+
+class TimetableModel extends Model
 {
     public static function getAll(){
-
-
-        $result = mysqli_query($db,$sql);
-        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
         try{
             $pdo=parent::getDB();
-            $query = "SELECT * FROM TVShows tvs JOIN Watching w ON tvs.TVShow_id = w.TVShow_id WHERE user_id = $_SESSION[user_id])";
+            $query = "SELECT * FROM `TVShow` tvs JOIN `Watching` w ON tvs.`TVShow_id` = w.`TVShow_id` WHERE `user_id` = 1";
+
 
             $stmt = $pdo->query($query);
 
-            return $stmt->fetchAll(\PDO::FETCH_OBJ);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         }catch(\PDOException $e){
             echo $e->getMessage();
         }
-
     }
-
 }
 
 

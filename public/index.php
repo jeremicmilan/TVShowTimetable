@@ -1,29 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pveb_student
- * Date: 14/12/16
- * Time: 11:45
- */
+
+if (!isset($_SERVER['REQUEST_URI']))
+{
+    $_SERVER['REQUEST_URI'] = substr($_SERVER['PHP_SELF'],1 );
+    if (isset($_SERVER['QUERY_STRING'])) { $_SERVER['REQUEST_URI'].='?'.$_SERVER['QUERY_STRING']; }
+}
 
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(dirname(__FILE__)));
 
-require_once(ROOT.DS.'lib'.DS.'init.php');
+$loader = require(ROOT.DS.'vendor'.DS.'autoload.php');
 
-$router = new Router($_SERVER['REQUEST_URI']);
-/*
-echo "<pre>";
-print_r('Route: '.$router->getRoute().PHP_EOL);
-print_r('Controller: '.$router->getController().PHP_EOL);
-print_r('Action: '.$router->getMethodPrefix().$router->getAction().PHP_EOL);
-echo "Params: ";
-print_r($router->getParams());
-*/
+$router = new \Core\Router($_SERVER['REQUEST_URI']);
 
-App::run($_SERVER['REQUEST_URI']);
+$session_factory = new \Aura\Session\SessionFactory;
+$session = $session_factory->newInstance($_COOKIE);
 
-if($_SESSION['login_user'] != null) {
-    echo $_SESSION['login_user'];
-    echo $_SESSION['user_id'];
-}
+Core\App::run($_SERVER['REQUEST_URI']);
