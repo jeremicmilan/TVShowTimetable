@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use App;
+
 class Router {
 
     protected $uri;
@@ -42,15 +46,20 @@ class Router {
     public function __construct($uri) {
         $this->uri = urldecode(trim($uri,'/'));
 
-        $this->controller = Config::get('default_controller');
+        $this->controller = App\Config::default_controller;
 
-        $this->action = Config::get('default_action');
+        $this->action = App\Config::default_action;
 
         $uri_parts = explode('?', $this->uri);
 
         // Get path like http://localhost/TVShowsTimetable/controller/action/param1/param2
         $path = $uri_parts[0];
         $path_parts = explode('/', $path);
+
+        $pos = array_search("TVShowsTimetable", $path_parts);
+        $path_parts = array_slice($path_parts, $pos);
+        if($path_parts[1] == "public")
+            return;
 
         $i = 1;
         $length = count($path_parts);

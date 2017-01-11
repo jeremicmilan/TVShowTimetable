@@ -1,6 +1,8 @@
 <?php
 
-class Controller {
+namespace Core;
+
+abstract class Controller {
 
     protected $data;
 
