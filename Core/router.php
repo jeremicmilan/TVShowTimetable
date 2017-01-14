@@ -58,8 +58,6 @@ class Router {
 
         $pos = array_search("TVShowsTimetable", $path_parts);
         $path_parts = array_slice($path_parts, $pos);
-        if($path_parts[1] == "public")
-            return;
 
         $i = 1;
         $length = count($path_parts);

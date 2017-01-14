@@ -13,16 +13,11 @@ class View
         $this->model = $model;
     }
 
-    public static function render($view, $args=[]){
-
-        if(isset($args)){
-            extract($args, EXTR_SKIP);
-        }
-
-        if(is_readable("../App/Views/".$view))
-            include "../App/Views/".$view;
+    public function render($file){
+        if(is_readable("../App/Views/".$file))
+            include "../App/Views/".$file;
         else
-            echo "Error with $view file";
+            echo "Error with $file file";
 
     }
 }

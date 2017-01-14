@@ -27,8 +27,20 @@ class App {
 
             echo $result;
         } else {
-            throw new Exception('Method '.$controller_action.' of class '.$controller_class.' does not exist!');
+            throw new \Exception('Method '.$controller_action.' of class '.$controller_class.' does not exist!');
         }
+    }
+
+    public static function redirect($controller, $action="index", $params=[])
+    {
+        $uri = ".".DS.".".DS.$controller.DS.$action;
+
+        foreach ($params as $param)
+        {
+            $uri = $uri.DS.$param;
+        }
+
+        header('Location: '.$uri);
     }
 
 }

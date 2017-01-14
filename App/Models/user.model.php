@@ -7,19 +7,47 @@ use Core\Model;
 class UserModel extends Model
 {
     public $username;
-    public $id;
+    public $user_id;
 
-    public function initData(){
-        try{
-            $pdo=parent::getDB();
-            $query = "SELECT * FROM `TVShow` tvs JOIN `Watching` w ON tvs.`TVShow_id` = w.`TVShow_id` WHERE `user_id` = 1";
+    public $error;
 
+    public function InitUser($username, $password)
+    {
+        try
+        {
+            $pdo = parent::getDB();
+            $query = "SELECT * FROM `User` WHERE `username` = '$username' AND `password` = '".md5($password)."'";
 
             $stmt = $pdo->query($query);
 
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $count = $stmt->rowCount();
 
-        }catch(\PDOException $e){
+            // If result matched $myusername and $mypassword, table row must be 1 row
+            if ($count == 0)
+            {
+                $this->error = "Wrong username or password";
+
+                return false;
+            }
+            elseif($count == 1)
+            {
+                $result = $stmt->fetchAll(\PDO::FETCH_ASSOC)[0];
+
+                $this->username = $result["username"];
+                $this->user_id = $result["user_id"];
+
+                return true;
+            }
+            else
+            {
+                //TODO: Change error and log this server side (user shouldn't see this)
+                $this->error = "Multpile users with same credentials";
+
+                return false;
+            }
+        }
+        catch(\PDOException $e)
+        {
             echo $e->getMessage();
         }
     }

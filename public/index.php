@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (!isset($_SERVER['REQUEST_URI']))
 {
     $_SERVER['REQUEST_URI'] = substr($_SERVER['PHP_SELF'],1 );
@@ -9,11 +13,6 @@ if (!isset($_SERVER['REQUEST_URI']))
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(dirname(__FILE__)));
 
-$loader = require(ROOT.DS.'vendor'.DS.'autoload.php');
-
-$router = new \Core\Router($_SERVER['REQUEST_URI']);
-
-$session_factory = new \Aura\Session\SessionFactory;
-$session = $session_factory->newInstance($_COOKIE);
+require(ROOT.DS.'vendor'.DS.'autoload.php');
 
 Core\App::run($_SERVER['REQUEST_URI']);

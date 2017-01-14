@@ -3,14 +3,18 @@
 namespace App\Controllers;
 
 use App\Model;
-use Core\View;
 use Core;
 
 class TimetableController extends Core\Controller {
 
-    public function index() {
-        $shows = Model\TimetableModel::getAll();
+    public function __construct()
+    {
+        $this->model = new Model\TimetableModel;
+        $this->view = new Core\View($this, $this->model);
+    }
 
-        View::render("timetable.view.php",["shows"=>$shows]);
+    public function index() {
+        $this->model->initAllShows();
+        $this->view->render("timetable.view.php");
     }
 }

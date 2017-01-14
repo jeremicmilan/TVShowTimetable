@@ -2,60 +2,57 @@
 
 namespace App\Controllers;
 
-use App\Model\Post;
-use Core\View;
+use App\Model;
+use App\Config;
+use Core;
 
-class UserController extends Controller {
+class UserController extends Core\Controller
+{
+    public function __construct()
+    {
+        $this->model = new Model\UserModel;
+        $this->view = new Core\View($this, $this->model);
+    }
 
-public function index() {
-    $this->login();
-}
+    public function index()
+    {
+        $this->login();
+    }
 
-public function login() {
-    $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+    public function login()
+    {
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        // username and password sent from form
+            if($this->model->initUser($username, $password))
+            {
+                $session_factory = new \Aura\Session\SessionFactory;
+                $session = $session_factory->newInstance($_COOKIE);
 
-        $model = new UserModel();
-        $model->initData();
+                $segment = $session->getSegment("userData");
+                $segment->set("username", $this->model->username);
+                $segment->set("user_id", $this->model->user_id);
 
-        $username = mysqli_real_escape_string($db,$_POST['username']);
-        $password = mysqli_real_escape_string($db,$_POST['password']);
+                $session->commit();
 
-        $sql = "SELECT user_id FROM `User` WHERE username = '".$username."' and password = md5('".$password."')";
-        $result = mysqli_query($db,$sql);
-
-        $count = mysqli_num_rows($result);
-
-        // If result matched $myusername and $mypassword, table row must be 1 row
-
-        if($count == 1) {
-            $_SESSION['login_user'] = $username;
-            $_SESSION['user_id'] = $result->fetch_row()[0];
-
-            if($_SESSION['login_user'] != null) {
-                echo $_SESSION['login_user'];
-                echo $_SESSION['user_id'];
+                Core\App::redirect("timetable");
             }
+            else
+            {
+                $this->view->render("login.view.php");
+            }
+        }
+        else
+        {
+            $this->view->render("login.view.php");
+        }
 
-            header("location: index");
-        } else {
-            $error = "Your Login Name or Password is invalid";
+    }
+
+    public function logout() {
+        if(session_destroy()) {
+            header("Location: login");
         }
     }
-    else
-    {
-        View::render("login.view.php");
-    }
-
-}
-
-public function logout() {
-    session_start();
-
-    if(session_destroy()) {
-        header("Location: login");
-    }
-}
 }
