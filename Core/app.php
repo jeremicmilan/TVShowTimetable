@@ -31,16 +31,16 @@ class App {
         }
     }
 
-    public static function redirect($controller, $action="index", $params=[])
+    public static function redirect($controller, $action = "index", $params=[])
     {
-        $uri = ".".DS.".".DS.$controller.DS.$action;
+        $uri = HOST.DS.ROOT_URI.DS.$controller.DS.$action;
 
         foreach ($params as $param)
         {
             $uri = $uri.DS.$param;
         }
 
-        header('Location: '.$uri);
+        header("Location: http://".$uri, false);
     }
 
 }

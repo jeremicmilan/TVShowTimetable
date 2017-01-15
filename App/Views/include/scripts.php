@@ -1,0 +1,1 @@
+<script type="application/javascript" src="/TVShowsTimetable/public/js/router.js"></script>

@@ -8,15 +8,29 @@ class TimetableModel extends Model
 {
     public $shows;
 
-    public function initAllShows(){
-        try{
+    public function initAllShows()
+    {
+        try
+        {
+            $session_factory = new \Aura\Session\SessionFactory;
+            $session = $session_factory->newInstance($_COOKIE);
+
+            $segment = $session->getSegment("userData");
+            $id = $segment->get("user_id");
+
             $pdo=parent::getDB();
-            $query = "SELECT * FROM `TVShow` tvs JOIN `Watching` w ON tvs.`TVShow_id` = w.`TVShow_id` WHERE `user_id` = 1";
+
+            $session->commit();
+            $query = "SELECT *
+                      FROM `TVShow` tvs JOIN `Watching` w ON tvs.`TVShow_id` = w.`TVShow_id`
+                      WHERE `user_id` = ".$id;
 
             $stmt = $pdo->query($query);
 
             $this->shows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        }catch(\PDOException $e){
+        }
+        catch(\PDOException $e)
+        {
             echo $e->getMessage();
         }
     }

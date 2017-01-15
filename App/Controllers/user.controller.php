@@ -21,7 +21,8 @@ class UserController extends Core\Controller
 
     public function login()
     {
-        if($_SERVER["REQUEST_METHOD"] == "POST") {
+        if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
@@ -34,8 +35,6 @@ class UserController extends Core\Controller
                 $segment->set("username", $this->model->username);
                 $segment->set("user_id", $this->model->user_id);
 
-                $session->commit();
-
                 Core\App::redirect("timetable");
             }
             else
@@ -47,12 +46,20 @@ class UserController extends Core\Controller
         {
             $this->view->render("login.view.php");
         }
-
     }
 
-    public function logout() {
-        if(session_destroy()) {
-            header("Location: login");
+    public function logout()
+    {
+        $session_factory = new \Aura\Session\SessionFactory;
+        $session = $session_factory->newInstance($_COOKIE);
+
+        if($session->destroy())
+        {
+            Core\App::redirect("user", "login");
+        }
+        else
+        {
+            Core\App::redirect("user", "login");
         }
     }
 }

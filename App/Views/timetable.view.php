@@ -1,5 +1,9 @@
 <html>
-    <head></head>
+    <head>
+        <title>TVShows Timetable</title>
+
+        <?php include "include/scripts.php" ?>
+    </head>
     <body>
         <?php include 'include/nav.php' ?>
 

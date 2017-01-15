@@ -56,10 +56,7 @@ class Router {
         $path = $uri_parts[0];
         $path_parts = explode('/', $path);
 
-        $pos = array_search("TVShowsTimetable", $path_parts);
-        $path_parts = array_slice($path_parts, $pos);
-
-        $i = 1;
+        $i = 0;
         $length = count($path_parts);
 
         if($length > 1) {

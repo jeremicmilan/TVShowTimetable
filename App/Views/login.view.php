@@ -2,6 +2,8 @@
     <head>
         <title>Login Page</title>
 
+        <?php include "include/scripts.php" ?>
+
         <style type = "text/css">
             body {
                 font-family:Arial, Helvetica, sans-serif;
