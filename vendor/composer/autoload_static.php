@@ -25,6 +25,16 @@ class ComposerStaticInitaa602b301f9bc78423c79e7c5eb101a7
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'C' => 
+        array (
+            'Curl' => 
+            array (
+                0 => __DIR__ . '/..' . '/curl/curl/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'App\\Config' => __DIR__ . '/../..' . '/App/config.php',
         'App\\Controllers\\TimetableController' => __DIR__ . '/../..' . '/App/Controllers/timetable.controller.php',
@@ -33,6 +43,7 @@ class ComposerStaticInitaa602b301f9bc78423c79e7c5eb101a7
         'App\\Model\\UserModel' => __DIR__ . '/../..' . '/App/Models/user.model.php',
         'Core\\App' => __DIR__ . '/../..' . '/Core/app.php',
         'Core\\Controller' => __DIR__ . '/../..' . '/Core/controller.php',
+        'Core\\Error' => __DIR__ . '/../..' . '/Core/error.php',
         'Core\\Model' => __DIR__ . '/../..' . '/Core/model.php',
         'Core\\Router' => __DIR__ . '/../..' . '/Core/router.php',
         'Core\\View' => __DIR__ . '/../..' . '/Core/view.php',
@@ -43,6 +54,7 @@ class ComposerStaticInitaa602b301f9bc78423c79e7c5eb101a7
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitaa602b301f9bc78423c79e7c5eb101a7::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitaa602b301f9bc78423c79e7c5eb101a7::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitaa602b301f9bc78423c79e7c5eb101a7::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitaa602b301f9bc78423c79e7c5eb101a7::$classMap;
 
         }, null, ClassLoader::class);
