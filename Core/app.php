@@ -19,11 +19,25 @@ class App {
 
         $controller_class = 'App\\Controllers\\'.ucfirst(self::$router->getController()).'Controller';
         $controller_action = strtolower(self::$router->getAction());
+        $params = "";
+
+        $first = true;
+        foreach (self::$router->getParams() as $param)
+        {
+            if (!$first)
+            {
+                $params = $params.", ";
+            }
+
+            $params = $params.$param;
+
+            $first = false;
+        }
 
         // Calling controller's method
         $controller_object = new $controller_class();
         if(method_exists($controller_object, $controller_action)) {
-            $result = $controller_object->$controller_action();
+            $result = $controller_object->$controller_action($params);
 
             echo $result;
         } else {
