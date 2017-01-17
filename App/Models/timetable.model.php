@@ -34,6 +34,30 @@ class TimetableModel extends Model
             echo $e->getMessage();
         }
     }
+
+    public function addShowToDB($json)
+    {
+        try
+        {
+            $tvshow = json_decode($json, true);
+
+            $pdo=parent::getDB();
+
+            $title = $tvshow['Title'];
+            $plot = addcslashes($tvshow['Plot'], "\'");
+            $poster= $tvshow['Poster'];
+
+            $query = "INSERT INTO `TVShow` (`title`, `description`, `last_update`, `picture`)
+                      VALUES ('$title', '$plot', CURRENT_DATE, '$poster')";
+
+            $stmt = $pdo->query($query);
+
+        }
+        catch(\PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
 }
 
 
