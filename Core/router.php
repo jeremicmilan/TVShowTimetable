@@ -69,7 +69,9 @@ class Router {
 
             // Get action - next element of array
             if($i < $length) {
-                $this->action = strtolower($path_parts[$i]);
+                $this->action = preg_replace_callback(  '/_([a-z])/',
+                                                        function ($matches) { return strtoupper($matches[1]); },
+                                                        strtolower($path_parts[$i]));
                 $i++;
             }
 
