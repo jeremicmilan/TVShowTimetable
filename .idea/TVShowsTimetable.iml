@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/vendor/aura/session" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/curl/curl" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -32,10 +33,12 @@
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/aura/session" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/curl/curl" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/aura/session" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/curl/curl" />
         </SOURCES>
       </library>
     </orderEntry>
