@@ -23,7 +23,7 @@ class TimetableModel extends Model
             $session->commit();
             $query = "SELECT *
                       FROM `TVShow` tvs JOIN `Watching` w ON tvs.`TVShow_id` = w.`TVShow_id`
-                      WHERE `user_id` = ".$id;
+                      WHERE `user_id` = ".$id." ORDER BY `title`";
 
             $stmt = $pdo->query($query);
 
@@ -47,10 +47,18 @@ class TimetableModel extends Model
             $plot = addcslashes($tvshow['Plot'], "\'");
             $poster= $tvshow['Poster'];
 
-            $query = "INSERT INTO `TVShow` (`title`, `description`, `last_update`, `picture`)
-                      VALUES ('$title', '$plot', CURRENT_DATE, '$poster')";
+            //$query = "INSERT INTO `TVShow` (`title`, `description`, `last_update`, `picture`)
+            //          VALUES ('$title', '$plot', CURRENT_DATE, '$poster')";
 
-            $stmt = $pdo->query($query);
+            //$stmt = $pdo->query($query);
+
+            $stmt = $pdo->prepare("INSERT INTO `TVShow` (`title`, `description`, `last_update`, `picture`)
+                      VALUES (:title, :plot, CURRENT_DATE, :poster)");
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':plot', $plot);
+            $stmt->bindParam(':poster', $poster);
+            $stmt->execute();
+
 
         }
         catch(\PDOException $e)
