@@ -1,7 +1,8 @@
 {
   "require": {
     "aura/session": "2.1.0",
-    "curl/curl": "2.0.0-alpha1"
+    "curl/curl": "2.0.0-alpha1",
+    "twbs/bootstrap": "^3.3"
   },
   "autoload": {
     "classmap": ["Core/", "App/Controllers", "App/Models", "App/config.php"]
