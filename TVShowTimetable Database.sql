@@ -45,6 +45,7 @@ CREATE TABLE `Watching` (
 CREATE TABLE `Season` (
   `season_id` int(11) NOT NULL AUTO_INCREMENT,
   `TVShow_id` int(11) NOT NULL,
+  `season_number` int(11) NOT NULL,
   PRIMARY KEY (`season_id`),
   FOREIGN KEY (`TVShow_id`) REFERENCES `TVShow`(`TVShow_id`)
 	ON DELETE CASCADE
@@ -55,6 +56,7 @@ CREATE TABLE `Season` (
 CREATE TABLE `Episode` (
   `episode_id` int(11) NOT NULL AUTO_INCREMENT,
   `season_id` int(11) NOT NULL,
+  `title` varchar(50) NOT NULL,
   `airdate` datetime NOT NULL,
   `description` text NOT NULL,
   `picture` text,

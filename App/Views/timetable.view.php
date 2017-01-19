@@ -33,17 +33,17 @@
 
         <div class = "row" style="margin-top: 10px">
             <?php foreach($this->model->shows as $show) { ?>
+                <a href="#" onclick="redirect('timetable','tvshow/<?php echo $show["TVShow_id"];?>')">
+                    <div class = "col-md-2">
+                        <div class = "thumbnail">
+                            <img src="<?php echo $show["picture"] ?>" width="150">
+                        </div>
 
-
-                <div class = "col-md-2">
-                    <div class = "thumbnail">
-                        <img src="<?php echo $show["picture"] ?>" width="150">
+                        <div class = "caption">
+                            <h4 align="center"><?php echo $show["title"]; ?></h4>
+                        </div>
                     </div>
-
-                    <div class = "caption">
-                        <h4 align="center"><?php echo $show["title"]; ?></h4>
-                    </div>
-                </div>
+                </a>
             <?php } ?>
 
         </div>

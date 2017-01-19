@@ -18,6 +18,11 @@ class TimetableController extends Core\Controller {
         $this->view->render("timetable.view.php");
     }
 
+    public function tvshow($id) {
+        $this->model->initTVShow($id);
+        $this->view->render("tvshow.view.php");
+    }
+
     public function getShowFromOmdbById($id) {
         // tt1124373
         // http://www.omdbapi.com/?i=tt1124373&plot=full&r=json
