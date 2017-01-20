@@ -9,7 +9,8 @@ class UserModel extends Model
     public $username;
     public $user_id;
 
-    public $error;
+    public $error_login;
+    public $error_register;
 
     public function InitUser($username, $password)
     {
@@ -25,7 +26,7 @@ class UserModel extends Model
             // If result matched $myusername and $mypassword, table row must be 1 row
             if ($count == 0)
             {
-                $this->error = "Wrong username or password";
+                $this->error_login = "Wrong username or password";
 
                 return false;
             }
@@ -41,10 +42,47 @@ class UserModel extends Model
             else
             {
                 //TODO: Change error and log this server side (user shouldn't see this)
-                $this->error = "Multpile users with same credentials";
+                $this->error_login = "Multpile users with same credentials";
 
                 return false;
             }
+        }
+        catch(\PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    public function registerUser($username, $password, $email)
+    {
+        try
+        {
+            $pdo=parent::getDB();
+
+            $stmt = $pdo->prepare("SELECT `username` FROM `User` WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            if($stmt->rowCount() != 0)
+            {
+                $this->error_register = "Already a user with this email address";
+
+                return false;
+            }
+
+
+            $stmt = $pdo->prepare("INSERT INTO `User` (`username`, `password`, `email`)
+                      VALUES (:username, :password, :email)");
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', md5($password));
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            $this->InitUser($username,$password);
+
+            return true;
+
+
         }
         catch(\PDOException $e)
         {

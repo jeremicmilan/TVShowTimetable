@@ -20,6 +20,9 @@ class TimetableModel extends Model
             $segment = $session->getSegment("userData");
             $id = $segment->get("user_id");
 
+            if(!is_numeric($id))
+                $id=0;
+
             $pdo=parent::getDB();
 
             $session->commit();

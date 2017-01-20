@@ -62,4 +62,34 @@ class UserController extends Core\Controller
             Core\App::redirect("user", "login");
         }
     }
+
+    public function register()
+    {
+        if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $email = $_POST['email'];
+
+            if($this->model->registerUser($username, $password, $email))
+            {
+                $session_factory = new \Aura\Session\SessionFactory;
+                $session = $session_factory->newInstance($_COOKIE);
+
+                $segment = $session->getSegment("userData");
+                $segment->set("username", $this->model->username);
+                $segment->set("user_id", $this->model->user_id);
+
+                Core\App::redirect("timetable");
+            }
+            else
+            {
+                $this->view->render("login.view.php");
+            }
+        }
+        else
+        {
+            $this->view->render("login.view.php");
+        }
+    }
 }
