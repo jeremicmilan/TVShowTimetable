@@ -72,10 +72,10 @@ VALUES 	('milosh', md5('miloshcic'), 'milosh.mitrovic@gmail.com'),
 	('jana', md5('janica'), 'proticjana@gmail.com'),
 	('milan', md5('milancic'), 'milanjeremic@live.com');
 
-INSERT INTO TVShow (`title`, `description`, `last_update`)
-VALUES	('Game of Thrones', 'Nine noble families fight for control over the mythical lands of Westeros. Meanwhile, a forgotten race hell-bent on destruction returns after being dormant for thousands of years.', NOW()),
-	('Orange is the New Black', 'The story of Piper Chapman, a woman in her thirties who is sentenced to fifteen months in prison after being convicted of a decade-old crime of transporting money to her drug-dealing girlfriend.', NOW()),
-	('Breaking Bad', 'A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family\'s future.', NOW());
+INSERT INTO TVShow (`title`, `description`, `last_update`, `picture`)
+VALUES	('Game of Thrones', 'Nine noble families fight for control over the mythical lands of Westeros. Meanwhile, a forgotten race hell-bent on destruction returns after being dormant for thousands of years.', NOW(), 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjM5OTQ1MTY5Nl5BMl5BanBnXkFtZTgwMjM3NzMxODE@._V1_SX300.jpg'),
+	('Orange is the New Black', 'The story of Piper Chapman, a woman in her thirties who is sentenced to fifteen months in prison after being convicted of a decade-old crime of transporting money to her drug-dealing girlfriend.', NOW(), 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjMzMjAxNDY5MV5BMl5BanBnXkFtZTgwMzAzNTQxODE@._V1_SX300.jpg'),
+	('Breaking Bad', 'A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family\'s future.', NOW(), 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ0ODYzODc0OV5BMl5BanBnXkFtZTgwMDk3OTcyMDE@._V1_SX300.jpg');
 
 INSERT INTO Watching (`user_id`, `TVShow_id`)
 VALUES 	(1, 1),
