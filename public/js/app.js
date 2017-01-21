@@ -1,5 +1,22 @@
 function redirect(controller, action = "index", params = [])
 {
+    var uri = buildUrl(controller, action, params);
+
+    window.location = uri;
+}
+
+function getFromServer(callback, controller, action = "index", params = [])
+{
+    var uri = buildUrl(controller, action, params);
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = callback;
+    xmlhttp.open("GET", uri, true);
+    xmlhttp.send();
+}
+
+function buildUrl(controller, action = "index", params = [])
+{
     var path = window.location.pathname;
     var app_name = "TVShowsTimetable";
     var paramsString = "";
@@ -25,5 +42,5 @@ function redirect(controller, action = "index", params = [])
         uri += "/" + paramsString;
     }
 
-    window.location = uri;
+    return uri;
 }
