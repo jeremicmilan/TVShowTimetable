@@ -26,9 +26,9 @@
                         <h5 ><?php echo $this->model->tvshow_info["description"]; ?></h5>
                     </div>
                     <?php if ($this->model->isFollowed) { ?>
-                        <button onclick="redirect('tvshow','unfollow', [<?php echo $this->model->tvshow_info["TVShow_id"] ?>])">Unfollow</button>
+                        <button onclick="redirect('tvshow','unfollow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Unfollow</button>
                     <?php } else { ?>
-                        <button onclick="redirect('tvshow','follow', [<?php echo $this->model->tvshow_info["TVShow_id"] ?>])">Follow</button>
+                        <button onclick="redirect('tvshow','follow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Follow</button>
                     <?php } ?>
 
             </div>
@@ -47,7 +47,7 @@
                         <div id="collapse<?php echo $i; ?>" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <?php foreach($this->model->episodes_info as $episode) {
-                                    if($episode['season_number'] == $i+1) { ?>
+                                    if($episode['season_id'] == $i+1) { ?>
                                         <table>
                                             <tr><td><?php echo $episode["title"]; ?></td><td><?php echo $episode["airdate"]; ?></td></tr>
                                         </table>

@@ -15,7 +15,7 @@
 
         <div class = "row" style="margin-top: 10px">
             <?php foreach($this->model->shows as $show) { ?>
-                <a href="#" onclick="redirect('tvshow','index', [<?php echo $show["TVShow_id"];?>])">
+                <a href="#" onclick="redirect('tvshow','index', ['<?php echo $show["tvshow_id"];?>'])">
                     <div class = "col-md-2">
                         <div class = "thumbnail">
                             <img src="<?php echo $show["picture"] ?>" width="150">
@@ -27,7 +27,6 @@
                     </div>
                 </a>
             <?php } ?>
-
         </div>
     </body>
 </html>
