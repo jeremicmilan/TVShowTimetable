@@ -7,12 +7,12 @@ class OMDb
     public static function getShowByTitle($title)
     {
         $host = "http://www.omdbapi.com/?";
-        $idParam = "t=".$title;
+        $titleParam = "t=".str_replace(" ", "+", $title);
+        $type = "type=series";
         $plot = "plot=full";
         $format = "r=json";
-        $type = "type=series";
 
-        $url = $host.$idParam."&".$plot."&".$format."&".$type;
+        $url = $host . $titleParam . "&" . $type . "&" . $plot . "&" . $format;
 
         $json = self::get_web_page($url);
 
@@ -29,7 +29,7 @@ class OMDb
         $format = "r=json";
         $type = "type=series";
 
-        $url = $host.$idParam."&".$plot."&".$format."&".$type;
+        $url = $host . $idParam . "&" . $type . "&" . $plot . "&" . $format;
 
         $json = self::get_web_page($url);
 
@@ -38,21 +38,67 @@ class OMDb
         return $tvshow;
     }
 
-    public static function getEpisodesForShowById($id)
+    public static function getSeasonsForShowById($id)
     {
         $host = "http://www.omdbapi.com/?";
         $idParam = "i=".$id;
         $plot = "plot=full";
         $format = "r=json";
-        $type = "type=episode";
 
-        $url = $host.$idParam."&".$plot."&".$format."&".$type;
 
-        $json = self::get_web_page($url);
+        $tvshow = self::getShowById($id);
 
-        $episodes = json_decode($json);
+        $seasons = [];
+
+        for ($i = 1; $i <= $tvshow->totalSeasons; $i++) {
+            $seasonParam = "Season=" . $i;
+
+            $url = $host . $idParam . "&" . $plot . "&" . $format . "&" . $seasonParam;
+
+            $json = self::get_web_page($url);
+
+            $season = json_decode($json);
+
+            $seasons[$i] = $season;
+        }
+
+        return $seasons;
+    }
+
+    public static function getEpisodesForSeason($tvshow_id, $season)
+    {
+        $host = "http://www.omdbapi.com/?";
+        $idParam = "i=" . $tvshow_id;
+        $plot = "plot=full";
+        $format = "r=json";
+
+        $episodes = [];
+
+        foreach ($season->Episodes as $episode) {
+            $seasonParam = "Season=" . $season->Season;
+            $episodeParam = "Episode=" . $episode->Episode;
+
+            $url = $host . $idParam . "&" . $plot . "&" . $format . "&" . $seasonParam . "&" . $episodeParam;
+
+            $json = self::get_web_page($url);
+
+            $result = json_decode($json);
+
+            $episodes[$episode->Episode] = $result;
+        }
 
         return $episodes;
+    }
+
+    public static function imdbIdToNum($id)
+    {
+        preg_match("/([0-9]+)/", $id, $matches);
+        return intval($matches[0]);
+    }
+
+    public static function numToImdbId($id)
+    {
+        return "tt".sprintf("%07s", $id);
     }
 
     private static function get_web_page($url)

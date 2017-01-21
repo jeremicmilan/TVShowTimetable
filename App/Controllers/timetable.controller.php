@@ -22,11 +22,20 @@ class TimetableController extends Core\Controller
 
     public function addShowByTitle($title)
     {
-        $tvshow = OMDb::getShowByTitle($title);
+        if (($tvshow = $this->model->getShowFromDB($title)))
+        {
+            $id = OMDb::numToImdbId($tvshow['tvshow_id']);
+        }
+        else
+        {
+            $tvshow = OMDb::getShowByTitle($title);
 
-        $this->model->addShowToDB($tvshow);
+            $this->model->addShowToDB($tvshow);
 
-        $id = $this->model->getTVShowId($title);
+            $id = $tvshow->imdbID;
+
+            $this->getEpisodesForShow($id);
+        }
 
         Core\App::redirect("tvshow", "index", [$id]);
     }
@@ -37,6 +46,15 @@ class TimetableController extends Core\Controller
 
         $this->model->addShowToDB($tvshow);
 
+        $this->getEpisodesForShow($id);
+
         Core\App::redirect("tvshow", "index", [$id]);
+    }
+
+    private function getEpisodesForShow($id)
+    {
+        $seasons = OMDb::getSeasonsForShowById($id);
+
+        $this->model->addSeasonsToDb($id, $seasons);
     }
 }
