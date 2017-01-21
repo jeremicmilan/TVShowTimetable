@@ -1,7 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pveb_student
- * Date: 21/01/17
- * Time: 11:16
- */
+
+namespace App\Controllers;
+
+use App\Model;
+use Core;
+
+class SearchController extends Core\Controller
+{
+
+}
