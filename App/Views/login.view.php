@@ -2,8 +2,8 @@
     <head>
         <title>Login Page</title>
 
+        <?php include "include/stylesheets.php" ?>
         <?php include "include/scripts.php" ?>
-        <?php include 'include/nav.php' ?>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -27,6 +27,8 @@
     </head>
 
     <body bgcolor = "#FFFFFF">
+        <?php include 'include/nav.php' ?>
+
         <div align = "center">
             <div style = "width:300px; border: solid 1px #333333; " align = "left">
                 <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
