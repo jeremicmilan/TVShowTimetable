@@ -7,8 +7,6 @@ use Core\Model;
 class TimetableModel extends Model
 {
     public $shows;
-    public $tvshow_info;
-    public $episodes_info;
 
     public function initAllShows()
     {
@@ -28,7 +26,8 @@ class TimetableModel extends Model
             $session->commit();
             $query = "SELECT *
                       FROM `TVShow` tvs JOIN `Watching` w ON tvs.`TVShow_id` = w.`TVShow_id`
-                      WHERE `user_id` = ".$id." ORDER BY `title`";
+                      WHERE `user_id` = $id
+                      ORDER BY `title`";
 
             $stmt = $pdo->query($query);
 
@@ -52,19 +51,12 @@ class TimetableModel extends Model
             $plot = addcslashes($tvshow['Plot'], "\'");
             $poster= $tvshow['Poster'];
 
-            //$query = "INSERT INTO `TVShow` (`title`, `description`, `last_update`, `picture`)
-            //          VALUES ('$title', '$plot', CURRENT_DATE, '$poster')";
-
-            //$stmt = $pdo->query($query);
-
             $stmt = $pdo->prepare("INSERT INTO `TVShow` (`title`, `description`, `last_update`, `picture`)
                       VALUES (:title, :plot, CURRENT_DATE, :poster)");
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':plot', $plot);
             $stmt->bindParam(':poster', $poster);
             $stmt->execute();
-
-
         }
         catch(\PDOException $e)
         {
@@ -72,25 +64,19 @@ class TimetableModel extends Model
         }
     }
 
-    public function initTVShow($id)
+    public function getTVShowId($name)
     {
-        try {
+        try
+        {
             $pdo = parent::getDB();
 
-            $query = "SELECT * 
-                    FROM `TVShow`
-                    WHERE TVShow_id = ".$id;
+            $query = "SELECT `TVShow_id`
+                    FROM `TVShow` tvs
+                    WHERE lower(title) = '".strtolower($name)."'";
 
             $stmt = $pdo->query($query);
-            $this->tvshow_info = $stmt->fetchAll(\PDO::FETCH_ASSOC)[0];
 
-            $query = "SELECT e.airdate, e.description
-                    FROM `TVShow` tvs JOIN `Season` s ON tvs.TVShow_id=s.TVShow_id
-                    JOIN `Episode` e ON s.season_id = e.season_id
-                    WHERE tvs.TVShow_id = ".$id." ORDER BY e.airdate";
-
-            $stmt = $pdo->query($query);
-            $this->episodes_info = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC)[0]['TVShow_id'];
         }
         catch(\PDOException $e)
         {
