@@ -19,18 +19,22 @@ class TimetableModel extends Model
             $segment = $session->getSegment("userData");
             $id = $segment->get("user_id");
 
-            if(!is_numeric($id))
-                $id=0;
-
             $pdo=parent::getDB();
 
             $session->commit();
-            $query = "SELECT *
-                      FROM `TVShow` tvs
-                      JOIN `Watching` w ON tvs.`tvshow_id` = w.`tvshow_id`
-                      WHERE `user_id` = $id
-                      ORDER BY `title`";
-
+            if ($id != false) {
+                $query = "SELECT *
+                          FROM `TVShow` tvs
+                          JOIN `Watching` w ON tvs.`tvshow_id` = w.`tvshow_id`
+                          WHERE `user_id` = $id
+                          ORDER BY `title`";
+            }
+            else
+            {
+                $query = "SELECT *
+                          FROM `TVShow` tvs
+                          ORDER BY `title`";
+            }
             $stmt = $pdo->query($query);
 
             $this->shows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
