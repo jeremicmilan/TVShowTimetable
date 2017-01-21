@@ -6,7 +6,7 @@
                     <div class="input-group col-md-6">
                         <input id="title" type="text" class="form-control input-lg" placeholder="Search..." />
                         <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="button" onclick="redirect('timetable', 'addShowByTitle', [document.getElementById('title').value])">
+                            <button class="btn btn-info btn-lg" type="button" onclick="redirect('search', 'searchDatabase', [document.getElementById('title').value])">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </span>
