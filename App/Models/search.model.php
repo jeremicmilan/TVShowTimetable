@@ -16,8 +16,8 @@ class SearchModel extends Model
             $pdo = parent::getDB();
 
             $query = "SELECT * 
-                        FROM `TVShow`
-                        WHERE LOWER(title) like '%$title%'";
+                      FROM `TVShow`
+                      WHERE LOWER(title) like '%$title%'";
 
             $stmt = $pdo->query($query);
             $this->database_results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
