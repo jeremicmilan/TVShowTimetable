@@ -39,12 +39,10 @@ class TimetableModel extends Model
         }
     }
 
-    public function addShowToDB($json)
+    public function addShowToDB($tvshow)
     {
         try
         {
-            $tvshow = json_decode($json, true);
-
             $pdo=parent::getDB();
 
             $title = $tvshow['Title'];

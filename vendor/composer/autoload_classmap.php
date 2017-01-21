@@ -15,6 +15,7 @@ return array(
     'App\\Model\\TimetableModel' => $baseDir . '/App/Models/timetable.model.php',
     'App\\Model\\TvshowModel' => $baseDir . '/App/Models/tvshow.model.php',
     'App\\Model\\UserModel' => $baseDir . '/App/Models/user.model.php',
+    'App\\OMDb' => $baseDir . '/App/omdb.php',
     'Core\\App' => $baseDir . '/Core/app.php',
     'Core\\Controller' => $baseDir . '/Core/controller.php',
     'Core\\Error' => $baseDir . '/Core/error.php',

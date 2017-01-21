@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Model;
+use App\OMDb;
 use Core;
 
 class TimetableController extends Core\Controller
@@ -19,48 +20,23 @@ class TimetableController extends Core\Controller
         $this->view->render("timetable.view.php");
     }
 
-    public function getShowFromOmdbByTitle($title)
+    public function addShowByTitle($title)
     {
-        // tt1124373
-        // http://www.omdbapi.com/?i=tt1124373&plot=full&r=json
+        $tvshow = OMDb::getShowByTitle($title);
 
-        $host = "http://www.omdbapi.com/?";
-        $idParam = "t=".$title;
-        $plot = "plot=full";
-        $format = "r=json";
-
-        $url = $host.$idParam."&".$plot."&".$format;
-
-        $json = $this->get_web_page($url);
-
-        $this->model->addShowToDB($json);
+        $this->model->addShowToDB($tvshow);
 
         $id = $this->model->getTVShowId($title);
 
         Core\App::redirect("tvshow", "index", [$id]);
     }
 
-    private function get_web_page($url)
+    public function addShowById($id)
     {
-        $options = array(
-            CURLOPT_RETURNTRANSFER => true,   // return web page
-            CURLOPT_HEADER         => false,  // don't return headers
-            CURLOPT_FOLLOWLOCATION => true,   // follow redirects
-            CURLOPT_MAXREDIRS      => 10,     // stop after 10 redirects
-            CURLOPT_ENCODING       => "",     // handle compressed
-            CURLOPT_USERAGENT      => "test", // name of client
-            CURLOPT_AUTOREFERER    => true,   // set referrer on redirect
-            CURLOPT_CONNECTTIMEOUT => 120,    // time-out on connect
-            CURLOPT_TIMEOUT        => 120,    // time-out on response
-        );
+        $tvshow = OMDb::getShowFromOmdbById($id);
 
-        $ch = curl_init($url);
-        curl_setopt_array($ch, $options);
+        $this->model->addShowToDB($tvshow);
 
-        $content  = curl_exec($ch);
-
-        curl_close($ch);
-
-        return $content;
+        Core\App::redirect("tvshow", "index", [$id]);
     }
 }
