@@ -5,30 +5,27 @@ namespace App\Controllers;
 use App\Model;
 use Core;
 
-class TimetableController extends Core\Controller {
-
+class TimetableController extends Core\Controller
+{
     public function __construct()
     {
         $this->model = new Model\TimetableModel;
         $this->view = new Core\View($this, $this->model);
     }
 
-    public function index() {
+    public function index()
+    {
         $this->model->initAllShows();
         $this->view->render("timetable.view.php");
     }
 
-    public function tvshow($id) {
-        $this->model->initTVShow($id);
-        $this->view->render("tvshow.view.php");
-    }
-
-    public function getShowFromOmdbById($id) {
+    public function getShowFromOmdbByTitle($title)
+    {
         // tt1124373
         // http://www.omdbapi.com/?i=tt1124373&plot=full&r=json
 
         $host = "http://www.omdbapi.com/?";
-        $idParam = "i=".$id;
+        $idParam = "t=".$title;
         $plot = "plot=full";
         $format = "r=json";
 
@@ -37,9 +34,14 @@ class TimetableController extends Core\Controller {
         $json = $this->get_web_page($url);
 
         $this->model->addShowToDB($json);
+
+        $id = $this->model->getTVShowId($title);
+
+        Core\App::redirect("tvshow", "index", [$id]);
     }
 
-    private function get_web_page($url) {
+    private function get_web_page($url)
+    {
         $options = array(
             CURLOPT_RETURNTRANSFER => true,   // return web page
             CURLOPT_HEADER         => false,  // don't return headers
