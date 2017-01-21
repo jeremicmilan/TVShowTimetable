@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Model;
+use App\OMDb;
 use Core;
 
 class SearchController extends Core\Controller
@@ -13,16 +14,20 @@ class SearchController extends Core\Controller
         $this->view = new Core\View($this, $this->model);
     }
 
-    public function searchDatabase($title)
+    public function index($keyword)
     {
-        $this->model->searchDatabase($title);
+        $this->model->keyword = $keyword;
         $this->view->render("search.view.php");
     }
 
-    public function searchOmdbByTitle($title)
+    public function searchDatabase($title)
     {
-        $this->model->searchOmdbByTitle($title);
-        $this->view->render("search.view.php");
+        echo $this->model->searchDatabase($title);
+    }
+
+    public function searchOmdbByTitle($keyword)
+    {
+        echo json_encode(OMDb::searchShowByTitle($keyword)->Search);
     }
 
 }
