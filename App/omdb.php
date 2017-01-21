@@ -6,15 +6,13 @@ class OMDb
 {
     public static function getShowByTitle($title)
     {
-        // tt1124373
-        // http://www.omdbapi.com/?i=tt1124373&plot=full&r=json
-
         $host = "http://www.omdbapi.com/?";
         $idParam = "t=".$title;
         $plot = "plot=full";
         $format = "r=json";
+        $type = "type=series";
 
-        $url = $host.$idParam."&".$plot."&".$format;
+        $url = $host.$idParam."&".$plot."&".$format."&".$type;
 
         $json = self::get_web_page($url);
 
@@ -23,23 +21,38 @@ class OMDb
         return $tvshow;
     }
 
-    public static function getShowFromOmdbById($id)
+    public static function getShowById($id)
     {
-        // tt1124373
-        // http://www.omdbapi.com/?i=tt1124373&plot=full&r=json
-
         $host = "http://www.omdbapi.com/?";
         $idParam = "i=".$id;
         $plot = "plot=full";
         $format = "r=json";
+        $type = "type=series";
 
-        $url = $host.$idParam."&".$plot."&".$format;
+        $url = $host.$idParam."&".$plot."&".$format."&".$type;
 
         $json = self::get_web_page($url);
 
         $tvshow = json_decode($json);
 
         return $tvshow;
+    }
+
+    public static function getEpisodesForShowById($id)
+    {
+        $host = "http://www.omdbapi.com/?";
+        $idParam = "i=".$id;
+        $plot = "plot=full";
+        $format = "r=json";
+        $type = "type=episode";
+
+        $url = $host.$idParam."&".$plot."&".$format."&".$type;
+
+        $json = self::get_web_page($url);
+
+        $episodes = json_decode($json);
+
+        return $episodes;
     }
 
     private static function get_web_page($url)

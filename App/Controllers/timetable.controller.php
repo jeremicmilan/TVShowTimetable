@@ -33,7 +33,7 @@ class TimetableController extends Core\Controller
 
     public function addShowById($id)
     {
-        $tvshow = OMDb::getShowFromOmdbById($id);
+        $tvshow = OMDb::getShowById($id);
 
         $this->model->addShowToDB($tvshow);
 
