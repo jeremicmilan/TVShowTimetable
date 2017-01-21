@@ -8,8 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Config' => $baseDir . '/App/config.php',
     'App\\Controllers\\TimetableController' => $baseDir . '/App/Controllers/timetable.controller.php',
+    'App\\Controllers\\TvshowController' => $baseDir . '/App/Controllers/tvshow.controller.php',
     'App\\Controllers\\UserController' => $baseDir . '/App/Controllers/user.controller.php',
     'App\\Model\\TimetableModel' => $baseDir . '/App/Models/timetable.model.php',
+    'App\\Model\\TvshowModel' => $baseDir . '/App/Models/tvshow.model.php',
     'App\\Model\\UserModel' => $baseDir . '/App/Models/user.model.php',
     'Core\\App' => $baseDir . '/Core/app.php',
     'Core\\Controller' => $baseDir . '/Core/controller.php',

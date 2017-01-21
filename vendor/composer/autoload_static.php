@@ -38,8 +38,10 @@ class ComposerStaticInitaa602b301f9bc78423c79e7c5eb101a7
     public static $classMap = array (
         'App\\Config' => __DIR__ . '/../..' . '/App/config.php',
         'App\\Controllers\\TimetableController' => __DIR__ . '/../..' . '/App/Controllers/timetable.controller.php',
+        'App\\Controllers\\TvshowController' => __DIR__ . '/../..' . '/App/Controllers/tvshow.controller.php',
         'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/App/Controllers/user.controller.php',
         'App\\Model\\TimetableModel' => __DIR__ . '/../..' . '/App/Models/timetable.model.php',
+        'App\\Model\\TvshowModel' => __DIR__ . '/../..' . '/App/Models/tvshow.model.php',
         'App\\Model\\UserModel' => __DIR__ . '/../..' . '/App/Models/user.model.php',
         'Core\\App' => __DIR__ . '/../..' . '/Core/app.php',
         'Core\\Controller' => __DIR__ . '/../..' . '/Core/controller.php',
