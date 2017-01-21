@@ -11,7 +11,7 @@
     </head>
     <body>
         <?php include 'include/nav.php' ?>
-        <?php include 'include/search.php' ?>
+        <?php include 'include/search_bar.php' ?>
 
         <div class="container">
             <div class="row" style="margin-top: 10px">
