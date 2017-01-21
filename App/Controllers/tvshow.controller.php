@@ -15,6 +15,7 @@ class TvshowController extends Core\Controller
 
     public function index($id)
     {
+        // TODO: if not in DB, check OMDb
         $this->model->initTVShow($id);
         $this->view->render("tvshow.view.php");
     }
