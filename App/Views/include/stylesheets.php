@@ -1,7 +1,1 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: pveb_student
- * Date: 20/01/17
- * Time: 19:23
- */
+<link rel="stylesheet" type="text/css" href="/TVShowsTimetable/public/css/style.css"/>
