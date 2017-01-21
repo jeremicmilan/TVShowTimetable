@@ -8,6 +8,7 @@ class TvshowModel extends Model
 {
     public $tvshow_info;
     public $episodes_info;
+    public $season_count;
     public $ourId;
     public $isFollowed;
 
@@ -30,7 +31,14 @@ class TvshowModel extends Model
             $stmt = $pdo->query($query);
             $this->tvshow_info = $stmt->fetchAll(\PDO::FETCH_ASSOC)[0];
 
-            $query = "SELECT e.airdate, e.description
+            $query = "SELECT COUNT(season_id) 'count'
+                    FROM `Season`
+                    WHERE TVShow_id = $id";
+
+            $stmt = $pdo->query($query);
+            $this->season_count = $stmt->fetchAll(\PDO::FETCH_ASSOC)[0]["count"];
+
+            $query = "SELECT s.season_number, e.title, e.airdate, e.description
                     FROM `TVShow` tvs JOIN `Season` s ON tvs.TVShow_id=s.TVShow_id
                     JOIN `Episode` e ON s.season_id = e.season_id
                     WHERE tvs.TVShow_id = $id ORDER BY e.airdate";

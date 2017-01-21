@@ -32,9 +32,33 @@
                     <?php } ?>
 
             </div>
-            <?php foreach($this->model->episodes_info as $episode) { ?>
 
+
+            <?php for($i=0; $i < $this->model->season_count; $i++) { ?>
+                <div class="panel-group" style="margin-top: 10px">
+                    <div class="panel panel-default">
+                        <a data-toggle="collapse" href="#collapse<?php echo $i; ?>" >
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    Season <?php echo $i+1; ?>
+                                </h4>
+                            </div>
+                        </a>
+                        <div id="collapse<?php echo $i; ?>" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <?php foreach($this->model->episodes_info as $episode) {
+                                    if($episode['season_number'] == $i+1) { ?>
+                                        <table>
+                                            <tr><td><?php echo $episode["title"]; ?></td><td><?php echo $episode["airdate"]; ?></td></tr>
+                                        </table>
+                                    <?php }
+                                } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <?php } ?>
+
         </div>
     </body>
 </html>
