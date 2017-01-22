@@ -32,7 +32,6 @@ class TvshowModel extends Model
 
             $stmt = $pdo->query($query);
 
-
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             if(empty($result))
                 return false;
@@ -59,7 +58,7 @@ class TvshowModel extends Model
                 $season_id = $season["season_id"];
                 $query = "SELECT *
                           FROM `Episode`
-                          WHERE season_id = $season_id
+                          WHERE season_id = $season_id AND tvshow_id = $id
                           ORDER BY episode_id ASC";
 
                 $stmt = $pdo->query($query);
@@ -270,7 +269,7 @@ class TvshowModel extends Model
                 foreach ($episodes as $episode)
                 {
                     $stmt = $pdo->prepare("INSERT INTO `Episode` (`tvshow_id`, `season_id`, `episode_id`, `title`, `airdate`, `description`, `picture`)
-                                           VALUES (:tvshow_id, :season_id, :episode_id, :title, :airdate, :description, :picture)");
+                                           VALUES (:tvshow_id, :season_id, :episode_id, :title, STR_TO_DATE(:airdate, '%d %b %Y'), :description, :picture)");
                     $stmt->bindParam(':tvshow_id', $tvshow_id);
                     $stmt->bindParam(':season_id', $season_id);
                     $stmt->bindParam(':episode_id', $episode->Episode);
