@@ -16,7 +16,18 @@ class TimetableController extends Core\Controller
 
     public function index()
     {
-        $this->model->initAllShows();
+        $this->model->initTimetable();
         $this->view->render("timetable.view.php");
+    }
+
+    public function shows()
+    {
+        $this->model->initAllShows();
+        $this->view->render("tvshows.view.php");
+    }
+
+    public function about()
+    {
+        $this->view->render("about.view.php");
     }
 }
