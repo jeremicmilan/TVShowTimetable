@@ -19,8 +19,6 @@
                 <div class="col-md-4">
                     <img src="<?php echo $this->model->tvshow_info["picture"] ?>">
                 </div>
-
-
                     <div class="col-md-8">
                         <h2 ><?php echo $this->model->tvshow_info["title"]; ?></h2>
                         <h5 ><?php echo $this->model->tvshow_info["description"]; ?></h5>
@@ -30,7 +28,6 @@
                     <?php } else { ?>
                         <button onclick="redirect('tvshow','follow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Follow</button>
                     <?php } ?>
-
             </div>
 
 
@@ -46,13 +43,11 @@
                         </a>
                         <div id="collapse<?php echo $i; ?>" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <?php foreach($this->model->episodes_info as $episode) {
-                                    if($episode['season_id'] == $i+1) { ?>
+                                <?php foreach($this->model->seasons[$i]["episodes"] as $episode) { ?>
                                         <table>
                                             <tr><td><?php echo $episode["title"]; ?></td><td><?php echo $episode["airdate"]; ?></td></tr>
                                         </table>
-                                    <?php }
-                                } ?>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

@@ -114,7 +114,10 @@ class OMDb
 
     public static function numToImdbId($id)
     {
-        return "tt".sprintf("%07s", $id);
+        if ($id[0] == "t")
+            return $id;
+        else
+            return "tt".sprintf("%07s", $id);
     }
 
     private static function get_web_page($url)
