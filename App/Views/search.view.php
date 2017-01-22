@@ -33,6 +33,8 @@
         <div id="db_results"></div>
 
         <div id="omdb_results"></div>
+
+        <div id="no_results"></div>
     </body>
 </html>
 
