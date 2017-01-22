@@ -23,7 +23,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="#" onclick="redirect('timetable')">Timeline</a></li>
+                <li><a href="#" onclick="redirect('timetable', 'shows')">Shows</a></li>
+                <li><a href="#" onclick="redirect('search')">Search</a></li>
                 <li><a href="#" onclick="redirect('timetable', 'about')">About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
