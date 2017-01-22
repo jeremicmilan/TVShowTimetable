@@ -1,12 +1,15 @@
 function onloadSearch(keyword)
 {
+    if(keyword == undefined)
+        return;
+
     getFromServer(processSearchResults, 'search', 'searchOmdbByTitle', [keyword]);
 }
 
 function search()
 {
     document.getElementById('loading').style.display = 'block';
-    getFromServer(processSearchResults, 'search', 'searchOmdbByTitle', [document.getElementById('omdb_title').value]);
+    getFromServer(processSearchResults, 'search', 'searchOmdbByTitle', [document.getElementById('search_keyword').value]);
 }
 
 function processSearchResults()
@@ -72,9 +75,16 @@ function printResults(tvshows, resultsId)
         caption.appendChild(h4);
         colmd2.appendChild(thumbnail);
         colmd2.appendChild(caption);
-        a.appendChild(colmd2)
+        a.appendChild(colmd2);
         div.appendChild(a);
         results.appendChild(div);
     }
 }
 
+function enter(event)
+{
+    if (event.keyCode == 13) {
+        var element = document.getElementById('search_button');
+        element.click();
+    }
+}
