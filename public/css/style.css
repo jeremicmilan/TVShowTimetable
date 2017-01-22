@@ -24,6 +24,11 @@
     }
     .row.content {height:auto;}
 }
-li{
+
+li {
     color: white;
+}
+
+p {
+    align:justify;
 }

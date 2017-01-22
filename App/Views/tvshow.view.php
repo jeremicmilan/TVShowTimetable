@@ -15,19 +15,24 @@
 
         <div class="container">
             <div class="row" style="margin-top: 10px">
-
                 <div class="col-md-4">
-                    <img src="<?php echo $this->model->tvshow_info["picture"] ?>">
+                    <img style="height:auto; width:75%" src="<?php echo $this->model->tvshow_info["picture"] ?>">
                 </div>
-                    <div class="col-md-8">
-                        <h2 ><?php echo $this->model->tvshow_info["title"]; ?></h2>
-                        <h5 ><?php echo $this->model->tvshow_info["description"]; ?></h5>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h1 ><?php echo $this->model->tvshow_info["title"]; ?></h1>
+                        </div>
+                        <div class="col-md-2">
+                            <?php if ($this->model->isFollowed) { ?>
+                                <button class="btn btn-info" onclick="redirect('tvshow','unfollow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Unfollow</button>
+                            <?php } else { ?>
+                                <button class="btn btn-primary" onclick="redirect('tvshow','follow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Follow</button>
+                            <?php } ?>
+                        </div>
                     </div>
-                    <?php if ($this->model->isFollowed) { ?>
-                        <button onclick="redirect('tvshow','unfollow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Unfollow</button>
-                    <?php } else { ?>
-                        <button onclick="redirect('tvshow','follow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Follow</button>
-                    <?php } ?>
+                    <h5 ><?php echo $this->model->tvshow_info["description"]; ?></h5>
+                </div>
             </div>
 
 
@@ -43,11 +48,25 @@
                         </a>
                         <div id="collapse<?php echo $i; ?>" class="panel-collapse collapse">
                             <div class="panel-body">
+                                <table>
                                 <?php foreach($this->model->seasons[$i]["episodes"] as $episode) { ?>
-                                        <table>
-                                            <tr><td><?php echo $episode["title"]; ?></td><td><?php echo $episode["airdate"]; ?></td></tr>
-                                        </table>
+                                        <td>
+                                            <div class = "thumbnail" style="height:235px; display:table-cell; vertical-align:middle; text-align:center">
+                                                <img src="<?php echo $episode["picture"]; ?>">
+                                            </div>
+                                        </td>
+                                        <td style="padding-left:10px; border-bottom: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD"">
+                                            <div style="padding-right:10px"><?php echo $episode["title"]; ?></div>
+                                        </td>
+                                        <td style="padding-left:10px; border-bottom: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD"">
+                                            <div style="padding-right:10px"><?php echo $episode["airdate"]; ?></div>
+                                        </td>
+                                        <td style="padding-left:10px; width:450px; border-bottom: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD">
+                                            <div style="text-align: justify; padding-right:10px"> <?php echo $episode["description"]; ?> </div>
+                                        </td>
+                                    </tr>
                                 <?php } ?>
+                                </table>
                             </div>
                         </div>
                     </div>
