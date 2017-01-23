@@ -18,8 +18,8 @@
             <hr/>
             <div class="bg-info" align="justify" style="border-radius:25px">
 
-                <h3 style="padding-left:20px; padding-right:20px; padding-top:20px">On <b>TVShowsTimetable</b> page you may see a preview of airings of all the series in database or if you
-                    are logged in of all the series you are following.</h3>
+                <h3 style="padding-left:20px; padding-right:20px; padding-top:20px">On <b>TVShowsTimetable</b> page you may see a preview of airings of all the series in database and if you
+                    are logged in your series are marked with blue container.</h3>
 
                 <h3 style="padding-left:20px; padding-right:20px">On <b>Shows</b> page you may see all the TV shows in the database or if you are logged in you
                     may see all the shows you are following.</h3>

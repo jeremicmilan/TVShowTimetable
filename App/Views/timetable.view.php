@@ -32,15 +32,15 @@
                         <?php foreach($episodes as $episode) { ?>
                             <a href="#" onclick="redirect('tvshow','index', ['<?php echo $episode["tvshow_id"];?>'])">
                                 <div class = "col-md-2">
-                                    <div class="title">
+                                    <div class="title" style="height:40px">
                                         <h4 align="center"><?php echo $episode["tvshow_name"]; ?></h4>
                                     </div>
 
-                                    <div class = "thumbnail" style="height:250px; display:table-cell; vertical-align:middle; text-align:center">
+                                    <div class = "thumbnail" style="height:250px; display:table-cell; vertical-align:middle; text-align:center; border: 2px solid <?php echo $episode["is_followed"] ? '#00bfff' : '#DDDDDD' ?>">
                                         <img style="height:auto; width:100%" src="<?php echo $episode["picture"]; ?>">
                                     </div>
 
-                                    <div class = "caption">
+                                    <div class = "caption" style="height:50px">
                                         <h4 align="center"><?php echo $episode["title"]; ?></h4>
                                     </div>
                                 </div>
