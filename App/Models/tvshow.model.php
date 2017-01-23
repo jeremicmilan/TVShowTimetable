@@ -11,6 +11,7 @@ class TvshowModel extends Model
     public $season_count;
     public $seasons;
     public $isFollowed;
+    public $isFromDb;
 
     public function initTVShowFromDb($id)
     {
@@ -231,7 +232,7 @@ class TvshowModel extends Model
             $id = OMDb::imdbIdToNum($tvshow->imdbID);
             $title = $tvshow->Title;
             $plot = addcslashes($tvshow->Plot, "\'");
-            $poster= $tvshow->Poster;
+            $poster= $tvshow->Poster == "N/A" ? "/TVShowsTimetable/public/img/default_img.png" : $tvshow->Poster;
 
             $stmt = $pdo->prepare("INSERT INTO `TVShow` (`tvshow_id`, `title`, `description`, `last_update`, `picture`)
                                    VALUES (:id, :title, :plot, CURRENT_DATE, :poster)");

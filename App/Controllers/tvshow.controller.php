@@ -16,9 +16,11 @@ class TvshowController extends Core\Controller
 
     public function index($id)
     {
+        $this->model->isFromDb = true;
         if (!$this->model->initTVShowFromDb(OMDb::imdbIdToNum($id)))
         {
             $this->model->initTVShowFromOMDb($id);
+            $this->model->isFromDb = false;
         }
 
         $this->view->render("tvshow.view.php");
@@ -54,7 +56,7 @@ class TvshowController extends Core\Controller
     public function unfollow($id)
     {
         $this->model->unfollow($id);
-        Core\App::redirect("timetable");
+        Core\App::redirect("tvshow", "index", [$id]);
     }
 
     public function addShowByTitle($title)

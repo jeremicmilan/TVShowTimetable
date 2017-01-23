@@ -13,7 +13,7 @@
         <?php include 'include/nav.php' ?>
         <?php include 'include/search_bar.php' ?>
 
-        <div class="container">
+        <div class="container" style="margin-top: 10px;">
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-4">
                     <img style="height:auto; width:75%" src="<?php echo $this->model->tvshow_info["picture"] ?>">
@@ -25,13 +25,15 @@
                         </div>
                         <div class="col-md-2">
                             <?php if ($this->model->isFollowed) { ?>
-                                <button class="btn btn-info" onclick="redirect('tvshow','unfollow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Unfollow</button>
+                                <button class="btn btn-primary" onclick="redirect('tvshow','unfollow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Unfollow</button>
                             <?php } else { ?>
-                                <button class="btn btn-primary" onclick="redirect('tvshow','follow', ['<?php echo $this->model->tvshow_info["tvshow_id"] ?>'])">Follow</button>
+                                <button class="btn btn-info" onclick="follow('<?php echo $this->model->tvshow_info["tvshow_id"] ?>')">Follow</button>
                             <?php } ?>
                         </div>
                     </div>
-                    <h5 ><?php echo $this->model->tvshow_info["description"]; ?></h5>
+                    <h5 style="text-align: justify;"><?php echo $this->model->tvshow_info["description"]; ?></h5>
+
+                    <?php include 'include/loading.php' ?>
                 </div>
             </div>
 
@@ -50,20 +52,28 @@
                             <div class="panel-body">
                                 <table>
                                 <?php foreach($this->model->seasons[$i]["episodes"] as $episode) { ?>
-                                        <td>
-                                            <div class = "thumbnail" style="height:235px; display:table-cell; vertical-align:middle; text-align:center">
-                                                <img src="<?php echo $episode["picture"]; ?>">
-                                            </div>
-                                        </td>
+                                    <tr>
+                                        <?php if ($this->model->isFromDb) { ?>
+                                            <td>
+                                                <div class = "thumbnail" style="height:235px; display:table-cell; vertical-align:middle; text-align:center">
+                                                    <img src="<?php echo $episode["picture"]; ?>">
+                                                </div>
+                                            </td>
+                                        <?php } ?>
+
                                         <td style="padding-left:10px; border-bottom: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD"">
-                                            <div style="padding-right:10px"><?php echo $episode["title"]; ?></div>
+                                            <div style="padding-right:10px; width:230px"><?php echo $episode["title"]; ?></div>
                                         </td>
+
                                         <td style="padding-left:10px; border-bottom: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD"">
-                                            <div style="padding-right:10px"><?php echo $episode["airdate"]; ?></div>
+                                            <div style="padding-right:10px"><?php $date = date_create($episode["airdate"]); echo $date->format('d-m-Y'); ?></div>
                                         </td>
-                                        <td style="padding-left:10px; width:450px; border-bottom: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD">
-                                            <div style="text-align: justify; padding-right:10px"> <?php echo $episode["description"]; ?> </div>
-                                        </td>
+
+                                        <?php if ($this->model->isFromDb) { ?>
+                                            <td style="padding-left:10px; width:450px; border-bottom: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD; border-right: 1px solid #DDDDDD">
+                                                <div style="text-align: justify; padding-right:10px"> <?php echo $episode["description"]; ?> </div>
+                                            </td>
+                                        <?php } ?>
                                     </tr>
                                 <?php } ?>
                                 </table>

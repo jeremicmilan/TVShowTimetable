@@ -1,3 +1,5 @@
+/* The include of this file is not working. The browser loads it but it doesn't apply stuff from it */
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
     margin-bottom: 0;

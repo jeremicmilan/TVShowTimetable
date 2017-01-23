@@ -27,7 +27,24 @@ class SearchController extends Core\Controller
 
     public function searchOmdbByTitle($keyword)
     {
-        echo json_encode(OMDb::searchShowByTitle($keyword)->Search);
+        if($keyword != '')
+        {
+            $results = OMDb::searchShowByTitle($keyword);
+            if (property_exists($results, "Search"))
+            {
+                $this->model->search_results = OMDb::searchShowByTitle($keyword)->Search;
+                $this->model->error = false;
+            }
+            else
+            {
+                $this->model->error = $results->Error;
+            }
+        }
+        else
+        {
+            $this->model->search_results = [];
+        }
+        $this->view->render("partial/search_results.view.php");
     }
 
 }

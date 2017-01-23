@@ -1,8 +1,15 @@
 function redirect(controller, action = "index", params = [])
 {
+    //getFromServer(redirectCallback, controller, action, params);
     var uri = buildUrl(controller, action, params);
 
     window.location = uri;
+
+}
+
+function redirectCallback()
+{
+    window.innerHTML = this.responseText;
 }
 
 function getFromServer(callback, controller, action = "index", params = [])

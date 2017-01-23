@@ -13,7 +13,7 @@
     <?php include 'include/nav.php' ?>
     <?php include 'include/search_bar.php' ?>
 
-    <div class="container">
+    <div class="container" style="margin-top: 10px;>
         <div class = "row" style="margin-top:10px">
             <?php foreach($this->model->days as $day => $episodes) { ?>
                 <div class = "row" style="font-weight:bold">

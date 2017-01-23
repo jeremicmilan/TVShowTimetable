@@ -29,7 +29,7 @@
     <body bgcolor = "#FFFFFF">
         <?php include 'include/nav.php' ?>
 
-        <div align = "center">
+        <div align = "center" style="margin-top: 80px;>
             <div style = "width:300px; border: solid 1px #333333; " align = "left">
                 <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
 

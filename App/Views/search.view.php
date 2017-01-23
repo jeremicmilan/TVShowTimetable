@@ -11,7 +11,7 @@
     <body onload="onloadSearch('<?php echo $this->model->keyword; ?>')">
         <?php include 'include/nav.php' ?>
 
-        <div class="container">
+        <div class="container" style="margin-top: 80px;>
             <div class = "row" style="margin-top: 10px">
                 <div class="col-md-12">
                     <div id="custom-search-input">
@@ -35,8 +35,6 @@
         <div id="db_results"></div>
 
         <div id="omdb_results"></div>
-
-        <div id="no_results"></div>
     </body>
 </html>
 

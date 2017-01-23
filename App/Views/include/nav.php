@@ -11,7 +11,7 @@
 
 </style>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" style="position: fixed; top: 0; width: 100%; z-index: 1;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">

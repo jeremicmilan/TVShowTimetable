@@ -13,13 +13,13 @@
         <?php include 'include/nav.php' ?>
         <?php include 'include/search_bar.php' ?>
 
-        <div class = "container" style="margin-top: 10px">
+        <div class = "container" style="margin-top: 10px;">
             <div class="row">
                 <?php
-                $i = 0;
+                $i = -1;
                 foreach($this->model->shows as $show) {
                     $i++;
-                    if($i == 7) {
+                    if($i == 6) {
                         $i = 0;
                     ?>
                         </div>

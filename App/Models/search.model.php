@@ -8,6 +8,8 @@ use Core\Model;
 class SearchModel extends Model
 {
     public $keyword;
+    public $search_results;
+    public $error;
 
     public function searchDatabase($title)
     {
@@ -23,11 +25,5 @@ class SearchModel extends Model
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
-    }
-
-    public function searchOmdbById($id)
-    {
-        $this->omdb_result = OMDb::getShowById($id);
-        $this->addShowToDB($this->omdb_result);
     }
 }

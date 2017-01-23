@@ -77,7 +77,7 @@ class TimetableModel extends Model
                 }
                 else
                 {
-                    $query = "SELECT tvs.`tvshow_id`, tvs.`title` AS tvshow_name, s.`season_id`, e.*
+                    $query = "SELECT DISTINCT tvs.`tvshow_id`, tvs.`title` AS tvshow_name, s.`season_id`, e.*
                               FROM `TVShow` tvs
                               JOIN `Watching` w ON tvs.`tvshow_id` = w.`tvshow_id`
                               JOIN `Season` s ON tvs.`tvshow_id` = s.`tvshow_id`
